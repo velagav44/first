@@ -1,20 +1,19 @@
 pipeline {
     agent any
-    environment {
-        DOCKER_TAG = getDockerTag()
-    }
     stages {
-        stage('Build Docker Image') {
+         stage('Get Docker Tag') {
             steps {
                 script {
-                    def tag = getDockerTag()
-                    bat "docker build -t vijay4444/nodeapp:${tag} ."
+                    // Get the Docker tag and store it in an environment variable
+                    env.DOCKER_TAG = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
                 }
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                bat "docker build -t vijay4444/nodeapp:${env.DOCKER_TAG} ."
             }
         }
     }
 }
 
-def getDockerTag() {
-    return bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
-}
