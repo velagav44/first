@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                bat "docker build -t vijay4444/nodeapp:${env.DOCKER_TAG} ."
+                bat "docker build -t velavijay85/nodeapp:${env.DOCKER_TAG} ."
             }
         }
     }
