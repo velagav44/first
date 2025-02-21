@@ -12,7 +12,7 @@ pipeline {
           stage('Run Shell on Windows') {
             steps {
                 bat '"C:\\Program Files\\Git\\bin\\bash.exe" -c "echo Hello from Git Bash!"'
-                sh 'echo "The docker tag value is ${env.DOCKER_TAG}"'
+                echo "The docker tag value is ${env.DOCKER_TAG}"
                 }
         }
         /*
@@ -27,6 +27,7 @@ pipeline {
 
 def getDockerTag(){
     def tag = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
+    echo "The value of tag  is ${tag}"
     return tag
 }
 
