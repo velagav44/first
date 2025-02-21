@@ -6,14 +6,12 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-                echo 'Hello World'
+                sh 'echo Hello World' 
             }
         }
           stage('Run Shell on Windows') {
             steps {
-                 def commitHash = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                 echo "Current Commit Hash: ${commitHash}"
-                  
+                  echo "The docker tag value is ${env.DOCKER_TAG}"
                 }
         }
         /*
