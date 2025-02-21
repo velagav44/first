@@ -1,8 +1,8 @@
 pipeline {
     agent any
-   /* environment{
+    environment{
         DOCKER_TAG = getDockerTag()
-    }*/
+    }
     stages {
         stage('Hello') {
             steps {
@@ -14,18 +14,17 @@ pipeline {
                 bat '"C:\\Program Files\\Git\\bin\\bash.exe" -c "echo Hello from Git Bash!"'
                 }
         }
-          /*stage('Build Docker Image'){
+         stage('Build Docker Image'){
             steps{
-            /  sh "docker build . -t velavijay85/nodejs:${DOCKER_TAG}"
+               bat "docker build . -t velavijay85/nodejs:%DOCKER_TAG%"
             }
-        }*/
+        }
      }
 }
 
-/*
+
 def getDockerTag(){
-    def tag  = sh script: 'git rev-parse HEAD', returnStdout: true
+    def tag = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
     return tag
 }
 
-*/
