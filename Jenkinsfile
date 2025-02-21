@@ -12,7 +12,7 @@ pipeline {
           stage('Run Shell on Windows') {
             steps {
                 bat '"C:\\Program Files\\Git\\bin\\bash.exe" -c "echo Hello from Git Bash!"'
-                echo "The docker tag value is ${env.DOCKER_TAG}"
+                sh 'echo "The docker tag value is ${env.DOCKER_TAG}"'
                 }
         }
         /*
