@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('Docker Build and Push') {
       steps {
-        sh 'Welcome to Docker Build and Push'
+        sh 'echo Welcome to Docker Build and Push'
       }
     }
     stage('Build Docker Image') {
