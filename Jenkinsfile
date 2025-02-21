@@ -4,6 +4,12 @@ pipeline {
         DOCKER_TAG = getDockerTag()
     }
     stages {
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()
+                checkout scm 
+            }
+        }
           stage('Print Name'){
             steps{
                 echo 'My name is vijay'
