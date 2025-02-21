@@ -9,17 +9,16 @@ pipeline {
                 sh 'echo Hello World' 
             }
         }
-          stage('Run Shell on Windows') {
+          stage('Print Docker Tag') {
             steps {
                   echo "The docker tag value is ${env.DOCKER_TAG}"
                 }
         }
-        /*
          stage('Build Docker Image'){
             steps{
                bat "docker build . -t velavijay85/nodejs:%DOCKER_TAG%" 
             }
-        }*/
+        }
      }
 }
 
