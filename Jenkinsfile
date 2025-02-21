@@ -3,20 +3,18 @@ pipeline {
     environment{
         DOCKER_TAG = getDockerTag()
     }
-     stages {
+    stages {
           stage('Print Name'){
             steps{
                 echo 'My name is vijay'
             }
         }
-    }
-    stages {
           stage('Build Docker Image'){
             steps{
                 sh "docker build . -t velavijay85/nodejs:${DOCKER_TAG}"
             }
         }
-    }
+     }
 }
 
 def getDockerTag(){
