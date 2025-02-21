@@ -4,22 +4,16 @@ pipeline {
         DOCKER_TAG = getDockerTag()
     }
     stages {
-        stage('Clean Workspace') {
+        stage('Hello') {
             steps {
-                deleteDir()
-                checkout scm 
+                echo 'Hello World'
             }
         }
-          stage('Print Name'){
+          /*stage('Build Docker Image'){
             steps{
-                echo 'My name is vijay'
+            /  sh "docker build . -t velavijay85/nodejs:${DOCKER_TAG}"
             }
-        }
-          stage('Build Docker Image'){
-            steps{
-                sh "docker build . -t velavijay85/nodejs:${DOCKER_TAG}"
-            }
-        }
+        }*/
      }
 }
 
