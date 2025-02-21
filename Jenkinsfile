@@ -9,6 +9,11 @@ pipeline {
                 echo 'Hello World'
             }
         }
+          stage('Run Shell on Windows') {
+            steps {
+                sh 'F:/Git/bin/bash.exe -c "echo Hello from Git Bash!"'
+            }
+        }
           /*stage('Build Docker Image'){
             steps{
             /  sh "docker build . -t velavijay85/nodejs:${DOCKER_TAG}"
