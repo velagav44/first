@@ -3,6 +3,13 @@ pipeline {
     environment{
         DOCKER_TAG = getDockerTag()
     }
+     stages {
+          stage('Print Name'){
+            steps{
+                echo 'My name is vijay'
+            }
+        }
+    }
     stages {
           stage('Build Docker Image'){
             steps{
