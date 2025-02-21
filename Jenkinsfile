@@ -11,8 +11,8 @@ pipeline {
         }
           stage('Run Shell on Windows') {
             steps {
-                sh 'F:/Git/bin/bash.exe -c "echo Hello from Git Bash!"'
-            }
+                bat '"F:/Git/bin/bash.exe -c "echo Hello from Git Bash!"'
+                }
         }
           /*stage('Build Docker Image'){
             steps{
