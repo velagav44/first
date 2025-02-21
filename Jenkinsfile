@@ -11,7 +11,9 @@ pipeline {
         }
           stage('Run Shell on Windows') {
             steps {
-                   echo "The docker tag value is ${env.DOCKER_TAG}"
+                 def commitHash = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                 echo "Current Commit Hash: ${commitHash}"
+                  
                 }
         }
         /*
