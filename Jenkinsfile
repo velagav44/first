@@ -12,13 +12,15 @@ pipeline {
           stage('Run Shell on Windows') {
             steps {
                 bat '"C:\\Program Files\\Git\\bin\\bash.exe" -c "echo Hello from Git Bash!"'
+                echo "The docker tag value is ${env.DOCKER_TAG}"
                 }
         }
+        /*
          stage('Build Docker Image'){
             steps{
                bat "docker build . -t velavijay85/nodejs:%DOCKER_TAG%" 
             }
-        }
+        }*/
      }
 }
 
