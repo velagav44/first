@@ -14,16 +14,6 @@ pipeline {
       }
     }
 
-     stage('Set Python Path') {
-            steps {
-                script {
-            def pythonPath = 'C:\\Users\\velag\\AppData\\Local\\Programs\\Python\\Python311\\python.exe' 
-            bat "${pythonPath} --version"  
-            bat "gcloud config set core/python-executable ${pythonPath}"
-            }
-          }
-        }
-
     stage('Authenticate with Google Cloud') {
       steps {
         script {
