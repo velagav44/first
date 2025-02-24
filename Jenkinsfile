@@ -1,40 +1,46 @@
 pipeline {
   agent any
   environment {
-    DOCKER_HUB_REPO = 'velavijay85/nodejs'
-    IMAGE_TAG = 'd50d7bdedf2680488abe0f8a87ca7b66407c5f4a'
     GKE_CLUSTER = 'student-cluster'
     PROJECT_ID = 'devops-dev-439108'
     GKE_ZONE = 'us-central1-a'
     K8S_MANIFEST_PATH = 'manifests'
   }
   stages {
-   
-    stage('Docker Build and Push') {
+
+    stage('Deploy to GKE Cluseter') {
       steps {
-        sh 'echo Welcome to Docker Build and Push'
+        sh 'echo Deploy to GKE Cluseter'
       }
     }
-    /*
-    stage('Build Docker Image') {
+
+    stage('Authenticate with Google Cloud') {
       steps {
-        sh script: "docker build . -t velavijay85/nodejs:${env.DOCKER_TAG}"
+        script {
+          withCredentials([file(credentialsId: 'gcp-service-account', variable: 'gcp-application-service-account')]) {
+            sh 'gcloud auth activate-service-account --key-file=$gcp-application-service-account'
+            sh "gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE"
+          }
+        }
       }
     }
-    stage('Docker Hub Push') {
+
+    stage('Deploy to GKE') {
       steps {
-      withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')]) {
-        sh "docker login -u velavijay85 -p ${dockerHubPwd}"
-        sh "docker push velavijay85/nodejs:${env.DOCKER_TAG}"
-         }
+        script {
+          sh "kubectl apply -f $K8S_MANIFEST_PATH/Deployment.yaml"
+          sh "kubectl apply -f $K8S_MANIFEST_PATH/Service.yaml"
+        }
       }
-    }*/
+    }
+  }
+
+  post {
+    success {
+      sh 'echo Deploymet is success '
+    }
+    failure {
+      sh 'echo deployment is filure '
+    }
   }
 }
-
-/*
-def getDockerTag() {
-  def tag = sh script: 'git rev-parse HEAD', returnStdout: true
-  return tag
-}
-*/
