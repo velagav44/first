@@ -14,6 +14,15 @@ pipeline {
       }
     }
 
+    stage('Seup Environemnt')
+    {
+      steps {
+        sh 'which python || which python3'
+        sh 'python3 --version || python --version'
+        sh 'gcloud config set core/python-executable $(which python3)'
+      }
+    }
+
     stage('Authenticate with Google Cloud') {
       steps {
         script {
