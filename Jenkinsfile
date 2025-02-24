@@ -17,10 +17,11 @@ pipeline {
     stage('Authenticate with Google Cloud') {
       steps {
         script {
-       withCredentials([file(credentialsId: 'gcp-service-account', variable: 'google-cloud-account')]) {
-       sh 'gcloud auth activate-service-account --key-file=$google-cloud-account'
-       sh "gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE"
-      }
+        withCredentials([file(credentialsId: 'gcp-service-account', variable: 'GOOGLE_CLOUD_ACCOUNT')]) {
+        sh 'gcloud auth activate-service-account --key-file="$GOOGLE_CLOUD_ACCOUNT"'
+        sh 'gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"'
+        }
+
         }
       }
     }
