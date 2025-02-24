@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: add-deployment
+  labels:
+    app: addDeployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: addDeployment
+  template:
+    metadata:
+      labels:
+        app: addDeployment
+    spec:
+      containers:
+        - name: add-container
+          image: velavijay85/nodejs:d50d7bdedf2680488abe0f8a87ca7b66407c5f4a
+          ports:
+            - containerPort: 3000
