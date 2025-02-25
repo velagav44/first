@@ -19,9 +19,9 @@ pipeline {
         script {
         withCredentials([file(credentialsId: 'gcp-service-account', variable: 'GOOGLE_CLOUD_ACCOUNT')]) {
         sh 'gcloud auth activate-service-account --key-file="$GOOGLE_CLOUD_ACCOUNT"'
-        sh 'gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"'
+        sh 'gcloud config set project "$PROJECT_ID"'
+        sh 'gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE" --project "$PROJECT_ID"'
         }
-
         }
       }
     }
