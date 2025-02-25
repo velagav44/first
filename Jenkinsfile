@@ -29,8 +29,8 @@ pipeline {
     stage('Deploy to GKE') {
       steps {
         script {
-          sh "kubectl apply -f $K8S_MANIFEST_PATH/Deployment.yaml"
-          sh "kubectl apply -f $K8S_MANIFEST_PATH/Service.yaml"
+          sh "kubectl apply -f ${K8S_MANIFEST_PATH}/Deployment.yaml"
+          sh "kubectl apply -f ${K8S_MANIFEST_PATH}/Service.yaml"
         }
       }
     }
