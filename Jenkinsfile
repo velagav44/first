@@ -14,6 +14,12 @@ pipeline {
       }
     }
 
+    stage('Wait for Approval') {
+            steps {
+                input message: 'Deploy to GKE?', ok: 'Proceed'
+            }
+        }
+
     stage('Authenticate with Google Cloud') {
       steps {
         script {
